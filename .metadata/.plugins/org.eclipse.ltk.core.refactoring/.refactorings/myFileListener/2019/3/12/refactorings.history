@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;myFileListener.myJson&apos; to &apos;myJsonFileListener&apos;&#x0D;&#x0A;- Original project: &apos;myFileListener&apos;&#x0D;&#x0A;- Original element: &apos;myFileListener.myJson&apos;&#x0D;&#x0A;- Renamed element: &apos;myFileListener.myJsonFileListener&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;myJson&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;myFileListener{myJson.java[myJson" matchStrategy="1" name="myJsonFileListener" qualified="false" references="true" similarDeclarations="false" stamp="1552827157228" textual="false" version="1.0"/>
+</session>

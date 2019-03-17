@@ -1,0 +1,50 @@
+package myFileListener;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import myFileListener.FileMd5;
+/**
+ * @author jyroo
+ * myfilelistener
+ */
+@SuppressWarnings("unused")
+public class myJsonFileListener {
+	static HashMap<String, String> hashmap = new HashMap<>(); //存放hash键值对
+	List<String> pathName = new ArrayList<String>();  //存放文件名
+	
+	@SuppressWarnings("static-access")
+	public void iteratorPath(String dir) {
+		
+		File file = new File(dir);
+		File[] files = file.listFiles();   //返回某个目录下所有文件和目录的绝对路径  return file[]
+		if(files != null) {
+			for(File each_file : files) {
+				if(each_file.isFile()) {
+					pathName.add(each_file.getName());          
+					String file_path = each_file.getAbsolutePath();
+					try {
+						FileMd5 mymd5 = new FileMd5();
+						String md5_value = mymd5.fileMd5(file_path);
+						hashmap.put(each_file.getName(), md5_value);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}else if(each_file.isDirectory()) {
+					//iteratorPath(file.getAbsolutePath());
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		myJsonFileListener file_walk = new myJsonFileListener();
+		file_walk.iteratorPath("E:\\tmp\\");
+		for(HashMap list : hashmap) {
+			System.out.println(list);
+		}
+	}
+	
+}

@@ -1,0 +1,19 @@
+package myFileListener;
+
+import java.io.File;
+
+public class fileWalk {
+	@SuppressWarnings("unused")
+	public void iteratorPath(String dir) {
+		List<String> pathName = new ArrayList<String>();
+		File file = new File(dir);
+		File[] files = file.listFiles();
+		if(files != null) {
+			for(File each_file : files) {
+				if(file.isFile()) {
+					pathName.add(file.getName());
+				}else if()
+			}
+		}
+	}
+}

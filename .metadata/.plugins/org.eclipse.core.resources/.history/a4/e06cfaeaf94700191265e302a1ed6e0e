@@ -1,0 +1,18 @@
+package myFileListener.test;
+import java.io.IOException;
+
+import myFileListener.FileMd5;
+public class FileMd5Test {
+	md5 = new FileMd5();
+	long startTime = System.currentTimeMillis();
+
+	  try {
+	    System.out.println(md5.fileMd5("E:\\tmp\\hi.txt"));
+	  } catch (IOException e) {
+	    e.printStackTrace();
+	  }
+
+	  long endTime = System.currentTimeMillis();
+
+	  System.out.println((endTime - startTime));
+}

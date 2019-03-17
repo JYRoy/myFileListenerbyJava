@@ -1,0 +1,20 @@
+package myFileListener.test;
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+
+import myFileListener.FileMd5;
+@SuppressWarnings("static-access")
+
+public class FileMd5Test {
+	@Test
+	public static void main(String[] args) {
+		FileMd5 md5 = new FileMd5();
+		try {
+	
+			System.out.println(md5.fileMd5("E:\\tmp\\hi.txt"));
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	}
+}

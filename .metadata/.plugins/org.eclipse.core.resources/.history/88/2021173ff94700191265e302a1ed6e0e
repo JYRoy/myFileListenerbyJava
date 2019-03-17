@@ -1,0 +1,8 @@
+package myFileListener.test;
+
+public class FileMd5Test {
+	long startTime = System.currentTimeMillis();
+	try {
+		System.out.println();
+	}
+}

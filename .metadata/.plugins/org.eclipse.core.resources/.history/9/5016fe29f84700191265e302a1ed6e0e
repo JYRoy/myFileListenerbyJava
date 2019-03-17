@@ -1,0 +1,28 @@
+package myFileListener;
+
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class FileMd5 {
+	public static String fileMd5(String inputFile) throws IOException{
+		
+		int bufferSize = 256 * 1024;
+		FileInputStream fileInputStream = null;
+		DigestInputStream digestInputStream = null;
+		
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+			
+			fileInputStream = new FileInputStream(inputFile);
+			digestInputStream = new DigestInputStream(fileInputStream, messageDigest);
+			
+			byte[] buffer = new bute[bufferSize];
+			
+			
+		}
+		return inputFile;
+	}
+}

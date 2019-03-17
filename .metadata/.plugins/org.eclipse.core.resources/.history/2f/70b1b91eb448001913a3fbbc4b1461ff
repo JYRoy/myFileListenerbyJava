@@ -1,0 +1,10 @@
+package myFileListener;
+
+import java.io.File;
+
+public class fileWalk {
+	public void iteratorPath(String dir) {
+		File file_or = new File(dir);
+		files = or.listFiles();
+	}
+}
