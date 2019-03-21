@@ -9,41 +9,42 @@ import java.io.IOException;
 public class FileMd5 {
 	public static String fileMd5(String inputFile) throws IOException{
 		
-		int bufferSize = 1024*1024;  //»º³åÇø´óĞ¡
+		int bufferSize = 1024*1024;  //ç¼“å†²åŒºå¤§å°
 		FileInputStream fileInputStream = null;
 		DigestInputStream digestInputStream = null;
 		
 		try {
-			//»ñÈ¡MD5µÄÊµÀı
+			//è·å–MD5çš„å®ä¾‹
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 			
 			fileInputStream = new FileInputStream(inputFile);
 			
 			digestInputStream = new DigestInputStream(fileInputStream, messageDigest);   //Creates a digest input stream, using the specified input stream and message digest.
 			
-			byte[] buffer = new byte[bufferSize];   //ÉèÖÃ»º³åÇø£¬¸¨Öú¶ÁÈ¡ÎÄ¼ş£¬±ÜÃâÎÄ¼ş¹ı´ó£¬µ¼ÖÂµÄIO¿ªÏú
+			byte[] buffer = new byte[bufferSize];   //è®¾ç½®ç¼“å†²åŒºï¼Œè¾…åŠ©è¯»å–æ–‡ä»¶ï¼Œé¿å…æ–‡ä»¶è¿‡å¤§ï¼Œå¯¼è‡´çš„IOå¼€é”€
 			while(digestInputStream.read(buffer)>0);  //read: updates the message digest    return int
-			// »ñÈ¡×îÖÕµÄMessageDigest
+			// è·å–æœ€ç»ˆçš„MessageDigest
 			messageDigest = digestInputStream.getMessageDigest();
-			// ÄÃµ½½á¹û return×Ö½ÚÊı×ébyte[] °üº¬16¸öÔªËØ
+			// æ‹¿åˆ°ç»“æœ returnå­—èŠ‚æ•°ç»„byte[] åŒ…å«16ä¸ªå…ƒç´ 
 			byte[] resultByteArray = messageDigest.digest();
 			
-			return byteArrayToHex(resultByteArray);	   //×ª»»byte Îª string ÀàĞÍ
+			return byteArrayToHex(resultByteArray);	   //è½¬æ¢byte ä¸º string ç±»å‹
 			
 		}catch(NoSuchAlgorithmException e) {
 			return null;
 		}finally {
 			try {
 				digestInputStream.close();
+				fileInputStream.close();
 			}catch (Exception e) {
-				
+				System.out.println(e);
 			}
 		}
 	}
 	
 	public static String byteArrayToHex(byte[] byteArray){
         char[] hexDigits = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-        //Ò»¸ö×Ö½ÚÊÇ°ËÎ»¶ş½øÖÆ Ò²¾ÍÊÇ2Î»Ê®Áù½øÖÆ×Ö·û
+        //ä¸€ä¸ªå­—èŠ‚æ˜¯å…«ä½äºŒè¿›åˆ¶ ä¹Ÿå°±æ˜¯2ä½åå…­è¿›åˆ¶å­—ç¬¦
         char[] resultCharArray = new char[byteArray.length*2];
 
         int index = 0;
@@ -53,5 +54,4 @@ public class FileMd5 {
         }
         return new String(resultCharArray);
     }
-
 }
