@@ -2,7 +2,9 @@ package myFileListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,31 +17,50 @@ import myFileListener.FileMd5;
  */
 @SuppressWarnings("unused")
 public class myFileListener {
-	HashMap<String, String> hashmap = new HashMap<>(); //´æ·Åhash¼üÖµ¶Ô
-	List<String> pathName = new ArrayList<String>();  //´æ·ÅÎÄ¼şÃû
+	HashMap<String, String> hashmap = new HashMap<>(); //å­˜æ”¾hashé”®å€¼å¯¹
 	
 	@SuppressWarnings("static-access")
 	public void iteratorPath(String dir) {
-		
-		File file = new File(dir);
-		File[] files = file.listFiles();   //·µ»ØÄ³¸öÄ¿Â¼ÏÂËùÓĞÎÄ¼şºÍÄ¿Â¼µÄ¾ø¶ÔÂ·¾¶  return file[]
-		if(files != null) {
-			for(File each_file : files) {
-				if(each_file.isFile()) {      // Èç¹ûÊÇÎÄ¼ş
-					pathName.add(each_file.getName());       //´æ´¢ÎÄ¼şÃû   
-					
-					String file_path = each_file.getAbsolutePath();    //»ñÈ¡ÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
-					
-					try {
-						FileMd5 mymd5 = new FileMd5();
-						String md5_value = mymd5.fileMd5(file_path);    //Éú³ÉÎÄ¼ş¶ÔÓ¦µÄhashÖµ
-						hashmap.put(each_file.getName(), md5_value);    //ÒÔÎÄ¼şÃû×÷Îªkey£¬hashÖµ×÷Îªvalue´æ´¢µ½hashmapÖĞ
-					} catch (Exception e) {
-						System.out.println("·¢Éú "+e+" µÄ´íÎó£¡£¡");
+		while(true) {
+			List<String> pathName = new ArrayList<String>();  //å­˜æ”¾æ–‡ä»¶å
+			File file = new File(dir);
+			File[] files = file.listFiles();   //è¿”å›æŸä¸ªç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶å’Œç›®å½•çš„ç»å¯¹è·¯å¾„  return file[]
+			if(files != null) {
+				for(File each_file : files) {
+					if(each_file.isFile()) {      // å¦‚æœæ˜¯æ–‡ä»¶
+						int jui=0, juj=0;
+						pathName.add(each_file.getName());       //å­˜å‚¨æ–‡ä»¶å   
+						
+						String file_path = each_file.getAbsolutePath();    //è·å–æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
+						
+						try {
+							FileMd5 mymd5 = new FileMd5();
+							String md5_value = mymd5.fileMd5(file_path);    //ç”Ÿæˆæ–‡ä»¶å¯¹åº”çš„hashå€¼
+							if(hashmap.get(each_file.getName())==null) {
+								System.out.println("æ–‡ä»¶å¤¹ï¼š" + dir + "ä¸­çš„æ–‡ä»¶ï¼š" + each_file.getName() + "ä¸ºæ–°å»ºæ–‡ä»¶ï¼æ—¶é—´ä¸ºï¼š" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+								hashmap.put(each_file.getName(), md5_value);    //ä»¥æ–‡ä»¶åä½œä¸ºkeyï¼Œhashå€¼ä½œä¸ºvalueå­˜å‚¨åˆ°hashmapä¸­
+							}
+							if(!hashmap.get(each_file.getName()).equals(md5_value)) {
+								System.out.println("æ–‡ä»¶å¤¹ï¼š" + dir + "ä¸­çš„æ–‡ä»¶ï¼š" + each_file.getName() + "è¢«æ›´æ–°ï¼æ—¶é—´ä¸ºï¼š" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+								hashmap.put(each_file.getName(), md5_value);
+							}
+						} catch (Exception e) {
+							System.out.println("å‘ç”Ÿ "+e+" çš„é”™è¯¯ï¼ï¼æ—¶é—´ä¸º" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+						}
 					}
-					
-				}else if(each_file.isDirectory()) {       //Èç¹ûÊÇÎÄ¼ş¼Ğ
-					iteratorPath(each_file.getAbsolutePath());   //µİ¹é±éÀú
+//					}else if(each_file.isDirectory()) {       //å¦‚æœæ˜¯æ–‡ä»¶å¤¹
+//						//iteratorPath(each_file.getAbsolutePath());   //é€’å½’éå†
+//					}
+				}
+				try {
+					for(String key : hashmap.keySet()) {
+						if(!pathName.contains(key)) {
+							System.out.println("æ–‡ä»¶å¤¹ï¼š" + dir + "ä¸­çš„æ–‡ä»¶ï¼š" + key + "çš„æ–‡ä»¶å·²è¢«åˆ é™¤ï¼æ—¶é—´ä¸ºï¼š" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+							hashmap.remove(key);
+						}
+					}
+				}catch(Exception e) {
+					System.out.println(e);
 				}
 			}
 		}
