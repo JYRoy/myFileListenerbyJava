@@ -10,7 +10,7 @@ public class fileWalk {
 	List<String> pathName = new ArrayList<String>();
 	public void iteratorPath(String dir) {
 		File file = new File(dir);
-		File[] files = file.listFiles();   //·µ»ØÄ³¸öÄ¿Â¼ÏÂËùÓĞÎÄ¼şºÍÄ¿Â¼µÄ¾ø¶ÔÂ·¾¶  return file[]
+		File[] files = file.listFiles();   //listFilesæ˜¯è·å–è¯¥ç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶å’Œç›®å½•çš„ç»å¯¹è·¯å¾„  return file[]
 		if(files != null) {
 			for(File each_file : files) {
 				if(each_file.isFile()) {

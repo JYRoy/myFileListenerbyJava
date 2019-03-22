@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n<expression enabled\="true" text\="File[]"/>\r\n<expression enabled\="true" text\="pathName"/>\r\n<expression enabled\="true" text\="hashmap"/>\r\n</watchExpressions>\r\n
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n<expression enabled\="true" text\="File[]"/>\r\n<expression enabled\="true" text\="pathName"/>\r\n<expression enabled\="true" text\="hashmap"/>\r\n<expression enabled\="true" text\="file_in&\#13;&\#10;"/>\r\n</watchExpressions>\r\n
